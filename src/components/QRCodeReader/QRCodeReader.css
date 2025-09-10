@@ -1,0 +1,166 @@
+.qr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 1rem;
+}
+
+.qr-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.qr-card h2 {
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.qr-reader-wrapper {
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.qr-video {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.start-scanning, .scanning-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.scan-button, .stop-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.scan-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.scan-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.stop-button {
+  background: #dc3545;
+  color: white;
+}
+
+.stop-button:hover {
+  background: #c82333;
+}
+
+.scan-result {
+  background: #e8f5e8;
+  border: 1px solid #4caf50;
+  color: #2e7d32;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  word-break: break-all;
+}
+
+.loading-message {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  color: #856404;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  background: #f8d7da;
+  border: 1px solid #dc3545;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.success-message {
+  background: #d4edda;
+  border: 1px solid #28a745;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.instructions {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.instructions p {
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .qr-card {
+    padding: 1.5rem;
+    margin: 0.5rem;
+  }
+
+  .qr-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .qr-reader-wrapper {
+    min-height: 250px;
+  }
+}
+
+help-text {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.help-text ul {
+  margin-left: 1rem;
+}
+
+.help-text li {
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.device-info {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+.scanning-controls p {
+  margin-bottom: 1rem;
+  color: #007bff;
+  font-weight: bold;
+}
