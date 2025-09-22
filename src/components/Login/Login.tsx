@@ -3,7 +3,7 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-   const navigate = useNavigate()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -24,7 +24,6 @@ const Login = () => {
     setError('');
 
     try {
-      // Aqui você conecta com seu backend
       const response = await fetch('http://192.168.1.110:3056/auth/login', {
         method: 'POST',
         headers: {
@@ -49,37 +48,46 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <h2>SisCheck</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+      <div className='content-left'>
+      </div>
 
-          <div className="form-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Senha"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
+      <div className='content-rigth'>
+        <div className="login-card">
+          <h2>Login com sua conta</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor='email'>Email</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          {error && <div className="error-message">{error}</div>}
+            <div className="form-group">
+              <label htmlFor='password'>Senha</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Senha"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <button type="submit" disabled={loading}>
-            {loading ? 'Entrando...' : 'Entrar'}
-          </button>
-        </form>
+            {error && <div className="error-message">{error}</div>}
+
+            <button type="submit" disabled={loading} className='btn-login'>
+              {loading ? 'Entrando...' : 'Entrar'}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

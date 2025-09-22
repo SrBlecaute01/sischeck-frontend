@@ -24,12 +24,10 @@ const QRCodeReader = () => {
 
   const checkCameraPermission = async () => {
     try {
-      // Primeiro, listar devices disponíveis
       const deviceList = await navigator.mediaDevices.enumerateDevices();
       const videoDevices = deviceList.filter(device => device.kind === 'videoinput');
       setDevices(videoDevices);
 
-      // Tentar acessar câmera
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: { ideal: 'environment' },
@@ -40,7 +38,6 @@ const QRCodeReader = () => {
 
       setHasPermission(true);
       setError('');
-      // Parar o stream imediatamente
       stream.getTracks().forEach(track => track.stop());
     } catch (err: any) {
       setHasPermission(false);
@@ -64,11 +61,9 @@ const QRCodeReader = () => {
       setError('');
 
       if (codeReader.current && videoRef.current) {
-        // Tentar encontrar câmera traseira
         let deviceId = undefined;
 
         if (devices.length > 0) {
-          // Procurar por câmera traseira
           const backCamera = devices.find(device =>
             device.label.toLowerCase().includes('back') ||
             device.label.toLowerCase().includes('rear') ||
@@ -78,7 +73,6 @@ const QRCodeReader = () => {
           if (backCamera) {
             deviceId = backCamera.deviceId;
           } else if (devices.length > 1) {
-            // Se não encontrar, usar a segunda câmera (geralmente é a traseira)
             deviceId = devices[1].deviceId;
           }
         }
@@ -187,7 +181,7 @@ const QRCodeReader = () => {
             {!isScanning && (
               <div className="start-scanning">
                 <button onClick={startScanning} className="scan-button">
-                  📱 Iniciar Escaneamento
+                  Iniciar Escaneamento
                 </button>
                 {devices.length > 0 && (
                   <p className="device-info">
@@ -199,9 +193,9 @@ const QRCodeReader = () => {
 
             {isScanning && (
               <div className="scanning-controls">
-                <p>📷 Escaneando... Aponte para o QR Code</p>
+                <p>Escaneando... Aponte para o QR Code</p>
                 <button onClick={stopScanning} className="stop-button">
-                  ⏹️ Parar Escaneamento
+                  Parar Escaneamento
                 </button>
               </div>
             )}
