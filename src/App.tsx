@@ -6,6 +6,7 @@ import AdminPage from './pages/AdminPage/AdminPage'
 import RegisterActivityPage from './pages/RegisterActivityPage/RegisterActivityPage'
 import ListActivityPage from './pages/ListActivityPage/ListActivityPage'
 import ParticipantPage from './pages/ParticipantPage/ParticipantPage'
+import ActivityPage from './pages/ActivityPage/ActivityPage'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path='*' element={<Navigate to="/login" replace />} />
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/participante' element={<ParticipantPage />} />
+        <Route path='/atividades' element={<ActivityPage />} />
         <Route path='/cadastro-atividades' element={<RegisterActivityPage />} />
         <Route path='/lista-atividades' element={<ListActivityPage/>} />
         <Route path='/qr-reader' element={<QRCodeReader />} />

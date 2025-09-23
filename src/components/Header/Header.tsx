@@ -17,6 +17,10 @@ const Header = () => {
       navigate('/participante')
    };
 
+   const navigateToActivityPage = () => {
+      navigate('/atividades')
+   };
+
    const handleLogout = () => {
       localStorage.removeItem('token')
       localStorage.removeItem('role')
@@ -37,7 +41,7 @@ const Header = () => {
          <nav>
             <ul>
                <li onClick={navigateToParticipantPage}>Área do Participante</li>
-               <li>Atividades</li>
+               <li onClick={navigateToActivityPage}>Atividades</li>
                {roleUser === 'ADMIN' ? (
                   <li onClick={navigateToAdminPage}>Área do Administrador</li>
                ) : (
