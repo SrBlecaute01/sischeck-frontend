@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
+import api from '../../config/api';
+import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
   const navigate = useNavigate()
@@ -18,29 +20,35 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const response = await fetch('http://192.168.1.110:3056/auth/login', {
-        method: 'POST',
+      const response = await api.post('/auth/login', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
       });
+      localStorage.setItem('token', response.data.data.token);
 
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token', data.token);
-        navigate('/qr-reader');
-      } else {
-        setError('Credenciais inválidas');
+      const token = localStorage.getItem('token');
+      console.log(token)
+      if (token) {
+        const decoded: any = jwtDecode(token);
+
+        const userRole = decoded.role;
+        localStorage.setItem('role', userRole)
       }
-    } catch (err) {
-      setError('Erro ao conectar com o servidor');
+
+      navigate('/participante');
+    } catch (err: any) {
+      if (err.response && err.response.status === 401) {
+        setError('Credenciais inválidas');
+      } else {
+        setError('Erro ao conectar com o servidor');
+      }
     } finally {
       setLoading(false);
     }

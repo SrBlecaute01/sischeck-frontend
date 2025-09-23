@@ -1,0 +1,52 @@
+.activity-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.activity-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(34,34,59,0.08);
+  padding: 1.5rem 1.2rem;
+  min-width: 260px;
+  max-width: 340px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.activity-card h2 {
+  font-size: 1.2rem;
+  color: #22223b;
+  margin-bottom: 0.3rem;
+}
+
+.activity-card p {
+  color: #4a4e69;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.activity-card .active {
+  color: #219150;
+  font-weight: bold;
+}
+
+.activity-card .inactive {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.error-message {
+  background: #ffe5e5;
+  color: #c0392b;
+  border-radius: 6px;
+  padding: 0.7rem 1rem;
+  font-size: 0.98rem;
+  text-align: center;
+  margin-top: 1rem;
+}
