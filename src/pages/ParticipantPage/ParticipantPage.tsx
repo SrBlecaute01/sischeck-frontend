@@ -6,7 +6,9 @@ const ParticipantPage = () => {
   return (
     <div className="participant-page-container">
       <Header />
-      <h1>Área do Participante</h1>
+      <div className='title-name'>
+        <h1>Área do Participante</h1>
+      </div>
     </div>
   );
 };

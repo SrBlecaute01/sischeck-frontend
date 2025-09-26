@@ -39,7 +39,9 @@ const ActivityPage = () => {
   return (
     <div className="admin-page-container">
       <Header />
-      <h1>Lista de Atividades</h1>
+      <div className='title-name'>
+        <h1>Lista de Atividades</h1>
+      </div>
       {loading && <p>Carregando...</p>}
       {error && <div className="error-message">{error}</div>}
       <div className="activity-list">

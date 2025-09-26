@@ -1,4 +1,5 @@
 .activity-list {
+  min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -13,6 +14,7 @@
   padding: 1.5rem 1.2rem;
   min-width: 260px;
   max-width: 340px;
+  height: 250px;
   flex: 1 1 260px;
   display: flex;
   flex-direction: column;

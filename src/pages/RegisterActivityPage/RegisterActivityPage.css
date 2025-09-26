@@ -1,0 +1,36 @@
+.title-name{
+  color: aliceblue;
+  display:flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.register-activity-form{
+  min-height: 100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group{
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.register-activity-form button{
+  background-color: #010111;
+  color: white;
+  font-size: medium;
+  border-radius: 12px;
+  height: 50px;
+  width: 100px;
+  border: none;
+  cursor: pointer;
+  margin-left: 48%
+}
+
+.register-activity-form button:hover{
+  background-color: #0D0E25;
+  transform: translateY(-2px) scale(1.03);
+  transition: .5s;
+}

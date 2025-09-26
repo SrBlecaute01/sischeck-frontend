@@ -1,9 +1,16 @@
 .card-container {
-   width: 300px;
+   width: 400px;
+   height: 200px;
    padding: 10px;
    border-radius: 8px;
+   background: rgba(255, 255, 255, 0.08);
+   color: aliceblue;
    box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.343);
    cursor: pointer;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   justify-content: space-around;
 }
 
 .card-container:hover {

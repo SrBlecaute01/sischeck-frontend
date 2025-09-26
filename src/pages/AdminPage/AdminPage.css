@@ -1,4 +1,8 @@
+.admin-page-container{
+   background: #0D0E25;
+}
 .main-content {
+   min-height: 100vh;
    display: flex;
    justify-content: center;
    align-items: center;

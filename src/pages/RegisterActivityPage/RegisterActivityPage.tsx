@@ -42,7 +42,9 @@ const RegisterActivityPage = () => {
   return (
     <div className="admin-page-container">
       <Header />
-      <h1>Cadastro de Atividade</h1>
+      <div className='title-name'>
+        <h1>Cadastro de Atividade</h1>
+      </div>
       <form className="register-activity-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="activityName">Nome da Atividade</label>
