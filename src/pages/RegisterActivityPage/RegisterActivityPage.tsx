@@ -7,6 +7,8 @@ const RegisterActivityPage = () => {
   const [form, setForm] = useState<any>({
     activityName: '',
     description: '',
+    keyword_entry: '',
+    keyword_exit: '',
     startDate: '',
     endDate: ''
   });
@@ -15,7 +17,12 @@ const RegisterActivityPage = () => {
   const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'keyword_entry' || name === 'keyword_exit') {
+      setForm({ ...form, [name]: value.toUpperCase() });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,9 +33,7 @@ const RegisterActivityPage = () => {
 
     try {
       const bodyRequest = {
-        ...form,
-        keyword_entry: "ENTRADA",
-        keyword_exit: "SAIDA"
+        ...form
       }
       await api.post('/activity', bodyRequest, {
         headers: {
@@ -36,7 +41,7 @@ const RegisterActivityPage = () => {
         }
       });
       setSuccess('Atividade cadastrada com sucesso!');
-      setForm({ activityName: '', description: '', startDate: '', endDate: '' });
+      setForm({ activityName: '', description: '', keyword_entry: '', keyword_exit: '', startDate: '', endDate: '' });
     } catch (err) {
       setError('Erro ao cadastrar atividade.');
     } finally {
@@ -72,6 +77,30 @@ const RegisterActivityPage = () => {
             onChange={handleChange}
             required
             placeholder="Ex: Minicurso ministrado pelo professor Jario"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="keyword_entry">Palavra-Chave Entrada</label>
+          <input
+            id="keyword_entry"
+            name="keyword_entry"
+            type='text'
+            value={form.keyword_entry}
+            onChange={handleChange}
+            required
+            placeholder="PENEDO"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="keyword_exit">Palavra-Chave Saída</label>
+          <input
+            id="keyword_exit"
+            name="keyword_exit"
+            type='text'
+            value={form.keyword_exit}
+            onChange={handleChange}
+            required
+            placeholder="ROCHEDO"
           />
         </div>
         <div className="form-group">
