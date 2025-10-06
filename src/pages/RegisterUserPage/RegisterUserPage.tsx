@@ -2,7 +2,7 @@ import { useState } from 'react';
 import api from '../../config/api';
 import './RegisterUserPage.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { AddCPFmask } from '../../utils/format-cpf';
+import { AddCPFmask, maskCPF } from '../../utils/format-cpf';
 
 const RegisterUserPage = () => {
   const navigate = useNavigate()
@@ -18,7 +18,7 @@ const RegisterUserPage = () => {
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     if (e.target.name === 'cpf') {
-      e.target.value = AddCPFmask(e.target.value);
+      e.target.value = maskCPF(e.target.value);
     }
 
     setFormData({

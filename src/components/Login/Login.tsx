@@ -3,6 +3,7 @@ import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import api from '../../config/api';
 import { jwtDecode } from 'jwt-decode';
+import { maskCPF, removeCPFMask } from '../../utils/format-cpf';
 
 interface LoginPageProps {
   onLoginSuccess: (token: string, role: string) => void;
@@ -11,17 +12,25 @@ interface LoginPageProps {
 const Login = ({ onLoginSuccess }: LoginPageProps) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    email: '',
+    cpf: '',
     password: ''
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleChange = (e: { target: { name: any; value: any; }; }) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    if (name === 'cpf') {
+      setFormData({
+        ...formData,
+        cpf: maskCPF(value)
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,7 +39,8 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
     setError('');
 
     try {
-      const response = await api.post('/auth/login', formData, {
+      const cleanCpf = removeCPFMask(formData.cpf)
+      const response = await api.post('/auth/login', { ...formData, cpf: cleanCpf }, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -68,13 +78,13 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
           <h2>Login com sua conta</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor='email'>Email</label>
+              <label htmlFor='cpf'>CPF</label>
               <input
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
+                id="cpf"
+                type="tel"
+                name="cpf"
+                placeholder="CPF"
+                value={maskCPF(formData.cpf)}
                 onChange={handleChange}
                 required
               />
