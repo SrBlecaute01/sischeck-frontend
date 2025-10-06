@@ -58,7 +58,6 @@ const RegisterUserPage = () => {
   };
 
   return (
-    <div className="container">
       <div className="login-container">
         <div className='content-left'>
         </div>
@@ -140,12 +139,11 @@ const RegisterUserPage = () => {
             </form>
             <div className='register-link'>
               <span>Já possui uma conta? </span>
-              <Link to="/cadastro">Faça o login</Link>
+              <Link to="/login">Faça o login</Link>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
