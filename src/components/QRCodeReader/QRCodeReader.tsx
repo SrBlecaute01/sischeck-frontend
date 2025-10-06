@@ -91,9 +91,16 @@ const QRCodeReader = () => {
         );
 
         if (result) {
+          const qrCodeContent = result.getText();
+
+          if (!qrCodeContent.includes(';')) {
+            setError('QR Code inválido. Tente novamente.');
+            stopScanning();
+            return;
+          }
+
           setScanResult(result.getText());
 
-          const qrCodeContent = result.getText();
           const parts = qrCodeContent.split(';')
           const firstContentQrCode = parts[0] ? parts[0].trim() : '';
           const secondContentQrCode = parts[1] ? parts[1].trim() : '';
