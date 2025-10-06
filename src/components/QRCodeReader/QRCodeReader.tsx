@@ -1,6 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import { BrowserMultiFormatReader } from '@zxing/library';
 import './QRCodeReader.css';
+import api from '../../config/api';
+import { jwtDecode } from 'jwt-decode';
+
+interface MyJwtPayload {
+  id: number;
+  email: string,
+  role: string
+}
 
 const QRCodeReader = () => {
   const [scanResult, setScanResult] = useState<string>('');
@@ -84,7 +92,13 @@ const QRCodeReader = () => {
 
         if (result) {
           setScanResult(result.getText());
-          await sendQRData(result.getText());
+
+          const qrCodeContent = result.getText();
+          const parts = qrCodeContent.split(';')
+          const firstContentQrCode = parts[0] ? parts[0].trim() : '';
+          const secondContentQrCode = parts[1] ? parts[1].trim() : '';
+
+          await sendQRData(firstContentQrCode, secondContentQrCode);
           stopScanning();
         }
       }
@@ -102,32 +116,37 @@ const QRCodeReader = () => {
     setIsScanning(false);
   };
 
-  const sendQRData = async (qrCodeContent: string) => {
+  const sendQRData = async (activityId: string, keyword: string) => {
     setLoading(true);
     setError('');
     setSuccess('');
 
+    const token = localStorage.getItem('token');
+    let userIdSession = 0;
+    if (token) {
+      const decoded = jwtDecode<MyJwtPayload>(token);
+      userIdSession = decoded.id
+      console.log('content: ', decoded)
+    }
+
     try {
       const requestData = {
-        qrCode: parseInt(qrCodeContent) || 1,
-        activityId: 2
+        qrCode: userIdSession,
+        activityId: parseInt(activityId),
+        keyword
       };
 
       const token = localStorage.getItem('token');
 
-      const response = await fetch('http://192.168.1.110:3056/attendance/qr', {
-        method: 'POST',
+      const response = await api.post('/attendance/qr', requestData, {
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify(requestData),
+        }
       });
 
-      if (response.ok) {
-        const data = await response.json();
+      if (response.status === 200) {
         setSuccess('QR Code processado com sucesso!');
-        console.log('Resposta:', data);
+        console.log('Resposta:', response.data);
       } else {
         setError('Erro ao processar QR Code');
       }
