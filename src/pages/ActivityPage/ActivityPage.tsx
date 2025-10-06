@@ -44,6 +44,11 @@ const ActivityPage = () => {
       </div>
       {loading && <p>Carregando...</p>}
       {error && <div className="error-message">{error}</div>}
+      {!loading && activities.length === 0 && (
+        <div className='title-name'>
+          <h3>Ainda não temos eventos cadastrados :(</h3>
+        </div>
+      )}
       <div className="activity-list">
         {activities.map(activity => (
           <div className="activity-card" key={activity.id}>

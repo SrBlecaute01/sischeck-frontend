@@ -9,3 +9,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.loading-page {
+  background-color: #010111;
+  color: #ffffff;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

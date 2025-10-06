@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import './Login.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../config/api';
 import { jwtDecode } from 'jwt-decode';
 
-const Login = () => {
+interface LoginPageProps {
+  onLoginSuccess: (token: string, role: string) => void;
+}
+
+const Login = ({ onLoginSuccess }: LoginPageProps) => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
@@ -42,7 +46,7 @@ const Login = () => {
         localStorage.setItem('role', userRole)
       }
 
-      navigate('/participante');
+      window.location.reload();
     } catch (err: any) {
       if (err.response && err.response.status === 401) {
         setError('Credenciais inválidas');
@@ -95,6 +99,10 @@ const Login = () => {
               {loading ? 'Entrando...' : 'Entrar'}
             </button>
           </form>
+          <div className='register-link'>
+            <span>Não possui uma conta? </span>
+            <Link to="/cadastro">Cadastre-se</Link>
+          </div>
         </div>
       </div>
     </div>

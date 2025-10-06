@@ -4,7 +4,7 @@ import api from '../../config/api';
 import './RegisterActivityPage.css';
 
 const RegisterActivityPage = () => {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<any>({
     activityName: '',
     description: '',
     startDate: '',
@@ -25,7 +25,12 @@ const RegisterActivityPage = () => {
     setError('');
 
     try {
-      await api.post('/activity', form, {
+      const bodyRequest = {
+        ...form,
+        keyword_entry: "ENTRADA",
+        keyword_exit: "SAIDA"
+      }
+      await api.post('/activity', bodyRequest, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
