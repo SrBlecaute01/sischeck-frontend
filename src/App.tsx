@@ -9,6 +9,7 @@ import ParticipantPage from './pages/ParticipantPage/ParticipantPage'
 import ActivityPage from './pages/ActivityPage/ActivityPage'
 import { useEffect, useState } from 'react';
 import RegisterUserPage from './pages/RegisterUserPage/RegisterUserPage'
+import TableActivityPage from './pages/TableActivityPage/TableActivityPage'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,6 +54,7 @@ function App() {
                   <Route path='/' element={<Navigate to="/admin" replace />} />
                   <Route path='*' element={<Navigate to="/admin" replace />} />
                   <Route path='/login' element={<Navigate to="/admin" replace />} />
+                  <Route path='/acoes-atividades' element={<TableActivityPage />}/>
                 </>
               ) : (
                 <Route path='*' element={<ActivityPage />} />

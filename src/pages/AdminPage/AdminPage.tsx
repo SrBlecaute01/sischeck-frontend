@@ -18,7 +18,7 @@ const AdminPage = () => {
                <Card
                   title="Listar Atividades"
                   description="Listar atividades do SisWeek"
-                  link='/lista-atividades'
+                  link='/acoes-atividades'
                />
             </div>
          </div>
