@@ -1,4 +1,22 @@
-.participant-page-container{
+.participant-page-container {
   min-height: 100vh;
   background: #0D0E25;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-name h1 {
+  text-align: center;
+  margin-top: 24px;
+  color: #fff;
+}
+
+.main-content {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  min-height: calc(100vh - 140px);
+  box-sizing: border-box;
 }

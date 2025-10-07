@@ -1,4 +1,5 @@
 import Header from '../../components/Header/Header';
+import QRCodeReader from '../../components/QRCodeReader/QRCodeReader';
 import './ParticipantPage.css';
 
 const ParticipantPage = () => {
@@ -6,8 +7,9 @@ const ParticipantPage = () => {
   return (
     <div className="participant-page-container">
       <Header />
-      <div className='title-name'>
-        <h1>Área do Participante</h1>
+
+      <div className='main-content'>
+        <QRCodeReader />
       </div>
     </div>
   );

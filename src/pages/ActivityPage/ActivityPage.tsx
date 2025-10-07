@@ -37,7 +37,7 @@ const ActivityPage = () => {
   }, []);
 
   return (
-    <div className="admin-page-container">
+    <div className="activity-page-container">
       <Header />
       <div className='title-name'>
         <h1>Lista de Atividades</h1>

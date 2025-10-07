@@ -1,36 +1,291 @@
-.title-name{
-  color: aliceblue;
-  display:flex;
-  justify-content: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.register-activity-form{
+.admin-page-container {
   min-height: 100vh;
-  display:flex;
-  flex-direction:column;
+  background: #0D0E25;
+  padding: 20px 0;
+  position: relative;
+  overflow-x: hidden;
+
 }
 
-.form-group{
-  margin-left: 40px;
-  margin-right: 40px;
+.admin-page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(120, 113, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 113, 206, 0.1) 0%, transparent 50%);
+  pointer-events: none;
 }
 
-.register-activity-form button{
-  background-color: #010111;
-  color: white;
-  font-size: medium;
+.title-name {
+  text-align: center;
+  margin: 2rem 0 3rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.title-name h1 {
+  color: #f8fafc;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.register-activity-form {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.register-activity-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(120, 113, 255, 0.8), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.form-group {
+  margin-bottom: 1.8rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  height: 50px;
-  width: 100px;
+  color: #f8fafc;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: rgba(120, 113, 255, 0.8);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 0 0 3px rgba(120, 113, 255, 0.2),
+    0 4px 12px rgba(120, 113, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.register-activity-form button {
+  background: linear-gradient(135deg, #7871ff 0%, #ff71ce 100%);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  min-width: 140px;
   border: none;
   cursor: pointer;
-  margin-left: 48%
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(120, 113, 255, 0.3);
 }
 
-.register-activity-form button:hover{
-  background-color: #0D0E25;
-  transform: translateY(-2px) scale(1.03);
-  transition: .5s;
+.register-activity-form button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(120, 113, 255, 0.4);
+}
+
+.register-activity-form button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.register-activity-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.success-message,
+.error-message {
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.success-message {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #bbf7d0;
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fecaca;
+}
+
+@media (max-width: 768px) {
+  .title-name h1 {
+    font-size: 2rem;
+  }
+
+  .register-activity-form {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: none;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 1.5rem;
+    width: calc(100% - 20px);
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(120, 113, 255, 0.8);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-actions {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-page-container {
+    padding: 10px 0;
+  }
+
+  .title-name h1 {
+    font-size: 1.8rem;
+  }
+
+  .register-activity-form {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: none;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    padding: 1.2rem;
+    width: calc(100% - 20px);
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: rgba(255, 255, 255, 0.22);
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    backdrop-filter: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  .register-activity-form button {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+.loading-button {
+  position: relative;
+}
+
+.loading-button::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
