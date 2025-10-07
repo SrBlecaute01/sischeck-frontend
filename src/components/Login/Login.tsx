@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../config/api';
 import { jwtDecode } from 'jwt-decode';
 import { maskCPF, removeCPFMask } from '../../utils/format-cpf';
+import logoImage from '../../assets/sisweek-logo.png';
 
 interface LoginPageProps {
   onLoginSuccess: (token: string, role: string) => void;
@@ -70,10 +71,10 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
 
   return (
     <div className="login-container">
-      <div className='content-left'>
-      </div>
-
-      <div className='content-rigth'>
+      <div className="login-content">
+        <div className="login-logo">
+          <img src={logoImage} alt="SisWeek Logo" />
+        </div>
         <div className="login-card">
           <h2>Login com sua conta</h2>
           <form onSubmit={handleSubmit}>
