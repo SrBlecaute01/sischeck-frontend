@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
-import sisweeklogo from '../../assets/sisweek-logo.png'
+import sisweeklogo from '../../assets/sisweek-newlogo.svg'
 import { useEffect, useState } from 'react';
 
 const Header = () => {

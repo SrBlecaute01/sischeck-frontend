@@ -3,7 +3,7 @@ import api from '../../config/api';
 import './RegisterUserPage.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { AddCPFmask, maskCPF } from '../../utils/format-cpf';
-import logoImage from '../../assets/sisweek-logo.png';
+import logoImage from '../../assets/sisweek-newlogo.svg';
 
 const RegisterUserPage = () => {
   const navigate = useNavigate()

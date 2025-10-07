@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../config/api';
 import { jwtDecode } from 'jwt-decode';
 import { maskCPF, removeCPFMask } from '../../utils/format-cpf';
-import logoImage from '../../assets/sisweek-logo.png';
+import logoImage from '../../assets/sisweek-newlogo.svg';
 import { FaEyeSlash } from 'react-icons/fa';
 import { IoEyeSharp } from 'react-icons/io5';
 
