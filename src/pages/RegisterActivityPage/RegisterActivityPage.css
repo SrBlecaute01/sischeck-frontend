@@ -78,12 +78,12 @@
   100% { left: 100%; }
 }
 
-.form-group {
+.form-group-register {
   margin-bottom: 1.8rem;
   position: relative;
 }
 
-.form-group label {
+.form-group-register label {
   display: block;
   color: #e2e8f0;
   font-size: 0.95rem;
@@ -92,8 +92,8 @@
   letter-spacing: 0.5px;
 }
 
-.form-group input,
-.form-group textarea {
+.form-group-register input,
+.form-group-register textarea {
   width: 100%;
   padding: 1rem 1.2rem;
   background: rgba(255, 255, 255, 0.08);
@@ -106,8 +106,8 @@
   backdrop-filter: blur(10px);
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.form-group-register input:focus,
+.form-group-register textarea:focus {
   outline: none;
   border-color: rgba(120, 113, 255, 0.8);
   background: rgba(255, 255, 255, 0.12);
@@ -117,12 +117,12 @@
   transform: translateY(-2px);
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
+.form-group-register input::placeholder,
+.form-group-register textarea::placeholder {
   color: #94a3b8;
 }
 
-.form-group textarea {
+.form-group-register textarea {
   min-height: 100px;
   resize: vertical;
 }
@@ -205,20 +205,20 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 
-  .form-group input,
-  .form-group textarea {
+  .form-group-register input,
+  .form-group-register textarea {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.4);
     backdrop-filter: none;
   }
 
-  .form-group input:focus,
-  .form-group textarea:focus {
+  .form-group-register input:focus,
+  .form-group-register textarea:focus {
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(120, 113, 255, 0.8);
   }
 
-  .form-group {
+  .form-group-register {
     margin-bottom: 1.5rem;
   }
 
@@ -247,15 +247,15 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
   }
 
-  .form-group input,
-  .form-group textarea {
+  .form-group-register input,
+  .form-group-register textarea {
     background: rgba(255, 255, 255, 0.22);
     border: 2px solid rgba(255, 255, 255, 0.45);
     backdrop-filter: none;
   }
 
-  .form-group input:focus,
-  .form-group textarea:focus {
+  .form-group-register input:focus,
+  .form-group-register textarea:focus {
     background: rgba(255, 255, 255, 0.28);
   }
 

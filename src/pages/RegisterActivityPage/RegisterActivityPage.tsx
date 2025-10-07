@@ -56,7 +56,7 @@ const RegisterActivityPage = () => {
         <h1>Cadastro de Atividade</h1>
       </div>
       <form className="register-activity-form" onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="activityName">Nome da Atividade</label>
           <input
             id="activityName"
@@ -68,7 +68,7 @@ const RegisterActivityPage = () => {
             placeholder="Ex: Minicurso de Python"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="description">Descrição</label>
           <textarea
             id="description"
@@ -79,7 +79,7 @@ const RegisterActivityPage = () => {
             placeholder="Ex: Minicurso ministrado pelo professor Jario"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="keyword_entry">Palavra-Chave Entrada</label>
           <input
             id="keyword_entry"
@@ -91,7 +91,7 @@ const RegisterActivityPage = () => {
             placeholder="PENEDO"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="keyword_exit">Palavra-Chave Saída</label>
           <input
             id="keyword_exit"
@@ -103,7 +103,7 @@ const RegisterActivityPage = () => {
             placeholder="ROCHEDO"
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="startDate">Data de Início</label>
           <input
             id="startDate"
@@ -114,7 +114,7 @@ const RegisterActivityPage = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="form-group-register">
           <label htmlFor="endDate">Data de Término</label>
           <input
             id="endDate"

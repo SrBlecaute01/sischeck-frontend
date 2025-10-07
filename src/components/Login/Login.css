@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #050A24; 
+  background-color: #050A24;
   width: 100%;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .login-logo img {
-  max-width: 260px !important; 
+  max-width: 260px !important;
   height: auto;
   display: inline-block;
 }
@@ -34,7 +34,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
-  margin: 0 20px; 
+  margin: 0 20px;
 }
 
 .login-card h2 {
@@ -53,7 +53,7 @@
 
 .form-group label {
   color: #787878;
-  font-size: 0.95rem !important; 
+  font-size: 0.95rem !important;
 }
 
 .form-group input {
@@ -61,7 +61,7 @@
   padding: 12px;
   border: 2px solid #ddd;
   border-radius: 5px;
-  font-size: 0.95rem !important; 
+  font-size: 0.95rem !important;
   transition: border-color 0.3s;
 }
 
@@ -106,7 +106,7 @@ button:disabled {
   color: #787878;
   text-align: center;
   display: block;
-  font-size: 0.9rem !important; 
+  font-size: 0.9rem !important;
 }
 
 .register-link a {
@@ -119,37 +119,76 @@ button:disabled {
   text-decoration: underline;
 }
 
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 45px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  padding: 5px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+}
+
+.password-toggle:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.password-toggle:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 1px;
+}
+
 @media (max-width: 480px) {
   .login-content {
     max-width: 100%;
     padding: 0 25px;
   }
-  
+
   .login-logo img {
-    max-width: 220px !important; 
+    max-width: 220px !important;
   }
-  
+
   .login-card {
     margin: 0.5rem;
     padding: 1.25rem;
     max-width: 90%;
   }
-  
+
   .login-card h2 {
-    font-size: 1.5rem !important; 
+    font-size: 1.5rem !important;
     margin-bottom: 1.5rem;
   }
-  
+
   .form-group {
     margin: 0 25px 24px 25px !important;
 
   }
-  
+
   .form-group input {
     padding: 10px;
     font-size: 0.9rem !important;
   }
-  
+
   .btn-login {
     padding: 10px;
     font-size: 0.9rem !important;

@@ -5,6 +5,8 @@ import api from '../../config/api';
 import { jwtDecode } from 'jwt-decode';
 import { maskCPF, removeCPFMask } from '../../utils/format-cpf';
 import logoImage from '../../assets/sisweek-logo.png';
+import { FaEyeSlash } from 'react-icons/fa';
+import { IoEyeSharp } from 'react-icons/io5';
 
 interface LoginPageProps {
   onLoginSuccess: (token: string, role: string) => void;
@@ -18,6 +20,7 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,6 +35,10 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
         [name]: value
       });
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -93,15 +100,25 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
 
             <div className="form-group">
               <label htmlFor='password'>Senha</label>
-              <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Senha"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
+              <div className="password-container">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Senha"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={togglePasswordVisibility}
+                  aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                >
+                  {showPassword ? <FaEyeSlash /> : <IoEyeSharp />}
+                </button>
+              </div>
             </div>
 
             {error && <div className="error-message">{error}</div>}
