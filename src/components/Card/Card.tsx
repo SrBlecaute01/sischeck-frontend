@@ -5,9 +5,10 @@ interface LoginProps {
    title: string;
    description: string;
    link: string;
+   icon?: React.ReactNode;
 }
 
-const Card = ({ title, description, link }: LoginProps) => {
+const Card = ({ title, description, link, icon }: LoginProps) => {
 
    const navigate = useNavigate()
 
@@ -18,7 +19,10 @@ const Card = ({ title, description, link }: LoginProps) => {
 
    return (
       <div onClick={navigateToPageLink} className="card-container">
-         <h1>{title}</h1>
+         <div className="card-header">
+            {icon && <div className="card-icon">{icon}</div>}
+            <h1>{title}</h1>
+         </div>
          <p>{description}</p>
       </div>
    );
