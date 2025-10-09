@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import api from '../../config/api';
 import './TableActivityPage.css';
-import { FaEdit, FaTrash, FaDownload, FaFilePdf, FaFileExcel } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
 import { IoQrCodeSharp } from 'react-icons/io5';
 
 interface Activity {
@@ -12,6 +12,8 @@ interface Activity {
   startDate: string | null;
   endDate: string | null;
   isActive: boolean;
+  keyword_entry?: string;
+  keyword_exit?: string;
 }
 
 const TableActivityPage = () => {
@@ -19,6 +21,10 @@ const TableActivityPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [deleteLoading, setDeleteLoading] = useState<number | null>(null);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
+  const [updateLoading, setUpdateLoading] = useState(false);
 
   useEffect(() => {
     fetchActivities();
@@ -39,8 +45,57 @@ const TableActivityPage = () => {
     }
   };
 
-  const handleEdit = (activityId: number) => {
-    console.log('Editar atividade:', activityId);
+  const handleEdit = (activity: Activity) => {
+    setSelectedActivity(activity);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setSelectedActivity(null);
+  };
+
+  const handleModalInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (!selectedActivity) return;
+
+    const { name, value, type } = e.target;
+    const isCheckbox = type === 'checkbox';
+
+    setSelectedActivity({
+      ...selectedActivity,
+      [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value,
+    });
+  };
+
+  const handleUpdateSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedActivity) return;
+
+    setUpdateLoading(true);
+    try {
+      const { id, ...updateData } = selectedActivity;
+
+      const payload = {
+        ...updateData,
+        startDate: updateData.startDate ? new Date(updateData.startDate).toISOString() : null,
+        endDate: updateData.endDate ? new Date(updateData.endDate).toISOString() : null,
+      };
+
+      const response = await api.put(`/activity/${id}`, payload, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+      setActivities(prev => prev.map(act => act.id === id ? response.data.data : act));
+      alert('Atividade atualizada com sucesso!');
+      handleModalClose();
+
+    } catch (err) {
+      alert('Erro ao atualizar atividade.');
+    } finally {
+      setUpdateLoading(false);
+    }
   };
 
   const handleDelete = async (activityId: number, activityName: string) => {
@@ -56,7 +111,6 @@ const TableActivityPage = () => {
         }
       });
 
-      // Remove a atividade da lista local
       setActivities(prev => prev.filter(activity => activity.id !== activityId));
       alert('Atividade excluída com sucesso!');
     } catch (err) {
@@ -67,20 +121,23 @@ const TableActivityPage = () => {
   };
 
   const handleDownloadPDF = (activityId: number) => {
-    // Implementar download PDF
     console.log('Download PDF da atividade:', activityId);
-    // Exemplo: window.open(`/api/activity/${activityId}/pdf`, '_blank');
   };
 
   const handleDownloadExcel = (activityId: number) => {
-    // Implementar download Excel
     console.log('Download Excel da atividade:', activityId);
-    // Exemplo: window.open(`/api/activity/${activityId}/excel`, '_blank');
   };
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return 'Não informado';
     return new Date(dateString).toLocaleString('pt-BR');
+  };
+
+  const formatToDateTimeLocal = (dateString: string | null) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return date.toISOString().slice(0, 16);
   };
 
   if (loading) {
@@ -159,7 +216,7 @@ const TableActivityPage = () => {
                     <td className="actions-cell">
                       <div className="action-buttons">
                         <button
-                          onClick={() => handleEdit(activity.id)}
+                          onClick={() => handleEdit(activity)}
                           className="action-btn edit-btn"
                           title="Editar atividade"
                         >
@@ -203,6 +260,93 @@ const TableActivityPage = () => {
       <div className="table-footer">
         <p>Total de atividades: <strong>{activities.length}</strong></p>
       </div>
+
+      {isModalOpen && selectedActivity && (
+        <div className="modal-backdrop" onClick={handleModalClose}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Editar Atividade</h2>
+              <button onClick={handleModalClose} className="modal-close-btn">
+                <FaTimes />
+              </button>
+            </div>
+            <form onSubmit={handleUpdateSubmit} className="modal-form">
+              <div className="form-group">
+                <label htmlFor="activityName">Nome da Atividade</label>
+                <input
+                  id="activityName"
+                  name="activityName"
+                  type="text"
+                  value={selectedActivity.activityName}
+                  onChange={handleModalInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Descrição</label>
+                <textarea
+                  id="description"
+                  name="description"
+                  value={selectedActivity.description}
+                  onChange={handleModalInputChange}
+                  rows={4}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="startDate">Data de Início</label>
+                <input
+                  id="startDate"
+                  name="startDate"
+                  type="datetime-local"
+                  value={formatToDateTimeLocal(selectedActivity.startDate)}
+                  onChange={handleModalInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="endDate">Data de Término</label>
+                <input
+                  id="endDate"
+                  name="endDate"
+                  type="datetime-local"
+                  value={formatToDateTimeLocal(selectedActivity.endDate)}
+                  onChange={handleModalInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="keyword_entry">Palavra-Chave Entrada</label>
+                <input
+                  id="keyword_entry"
+                  name="keyword_entry"
+                  type="text"
+                  value={selectedActivity.keyword_entry || ''}
+                  onChange={handleModalInputChange}
+                  placeholder="Ex: ENTRADA_PALESTRA_IA"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="keyword_exit">Palavra-Chave Saída</label>
+                <input
+                  id="keyword_exit"
+                  name="keyword_exit"
+                  type="text"
+                  value={selectedActivity.keyword_exit || ''}
+                  onChange={handleModalInputChange}
+                  placeholder="Ex: SAIDA_PALESTRA_IA"
+                />
+              </div>
+              <div className="modal-footer">
+                <button type="button" onClick={handleModalClose} className="btn-cancel">
+                  Cancelar
+                </button>
+                <button type="submit" className="btn-save" disabled={updateLoading}>
+                  {updateLoading ? 'Salvando...' : 'Salvar Alterações'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
