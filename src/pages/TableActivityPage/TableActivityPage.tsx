@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import api from '../../config/api';
 import './TableActivityPage.css';
-import { FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
+import { FaEdit, FaTimes, FaFilePdf, FaFileExcel } from 'react-icons/fa';
 import { IoQrCodeSharp } from 'react-icons/io5';
 import { MdOutlineDisabledByDefault } from 'react-icons/md';
 
@@ -30,6 +30,13 @@ const TableActivityPage = () => {
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
   const [activityToDeactivate, setActivityToDeactivate] = useState<Activity | null>(null);
   const [deactivateLoading, setDeactivateLoading] = useState(false);
+
+  // --- ESTADOS DO MODAL QR Code ---
+  const [isQrModalOpen, setIsQrModalOpen] = useState(false);
+  const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const [qrCodeTitle, setQrCodeTitle] = useState('');
+  const [qrCodeLoading, setQrCodeLoading] = useState(false); // Novo estado de loading
+  // ---
 
   useEffect(() => {
     fetchActivities();
@@ -137,13 +144,46 @@ const TableActivityPage = () => {
     }
   };
 
-  const handleDownloadPDF = (activityId: number) => {
-    console.log('Download PDF da atividade:', activityId);
+  // --- FUNÇÃO ATUALIZADA: Exibir Modal do QR Code ---
+  const handleShowQrCode = async (activityId: number, type: 'entry' | 'exit') => {
+    const endpoint = type === 'entry' ? 'qrEntryImage' : 'qrExitImage';
+    const title = type === 'entry' ? 'QR Code de Entrada' : 'QR Code de Saída';
+
+    setQrCodeTitle(title);
+    setIsQrModalOpen(true);
+    setQrCodeLoading(true);
+
+    try {
+      const response = await api.get(`/activity/${activityId}/${endpoint}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
+        responseType: 'blob' // MUITO IMPORTANTE: informa ao axios para tratar a resposta como dados binários
+      });
+
+      // Cria uma URL local para o blob da imagem recebida
+      const imageUrl = URL.createObjectURL(response.data);
+      setQrCodeUrl(imageUrl);
+
+    } catch (err) {
+      console.error("Erro ao buscar QR Code:", err);
+      alert("Não foi possível carregar o QR Code. Verifique se a atividade possui as palavras-chave definidas.");
+      setIsQrModalOpen(false); // Fecha o modal se der erro
+    } finally {
+      setQrCodeLoading(false);
+    }
   };
 
-  const handleDownloadExcel = (activityId: number) => {
-    console.log('Download Excel da atividade:', activityId);
+  const handleCloseQrModal = () => {
+    // IMPORTANTE: Revoga a URL do objeto para liberar memória
+    if (qrCodeUrl) {
+      URL.revokeObjectURL(qrCodeUrl);
+    }
+    setIsQrModalOpen(false);
+    setQrCodeUrl('');
+    setQrCodeTitle('');
   };
+  // ---
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return 'Não informado';
@@ -259,18 +299,20 @@ const TableActivityPage = () => {
                           </button>
                         }
 
+                        {/* Botão para QR Code de ENTRADA */}
                         <button
-                          onClick={() => handleDownloadPDF(activity.id)}
-                          className="action-btn download-btn pdf-btn"
-                          title="Download QRCode Entrada"
+                          onClick={() => handleShowQrCode(activity.id, 'entry')}
+                          className="action-btn qr-btn-entry"
+                          title="Exibir QR Code de Entrada"
                         >
                           <IoQrCodeSharp />
                         </button>
 
+                        {/* Botão para QR Code de SAÍDA */}
                         <button
-                          onClick={() => handleDownloadExcel(activity.id)}
-                          className="action-btn download-btn excel-btn"
-                          title="Download QRCode Saída"
+                          onClick={() => handleShowQrCode(activity.id, 'exit')}
+                          className="action-btn qr-btn-exit"
+                          title="Exibir QR Code de Saída"
                         >
                           <IoQrCodeSharp />
                         </button>
@@ -406,6 +448,37 @@ const TableActivityPage = () => {
               >
                 {deactivateLoading ? 'Desativando...' : 'Sim, Desativar'}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* --- MODAL ATUALIZADO: Exibição do QR Code --- */}
+      {isQrModalOpen && (
+        <div className="modal-backdrop" onClick={handleCloseQrModal}>
+          <div className="modal-content qr-modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>{qrCodeTitle}</h2>
+              <button onClick={handleCloseQrModal} className="modal-close-btn">
+                <FaTimes />
+              </button>
+            </div>
+            <div className="modal-body qr-code-container">
+              {qrCodeLoading ? (
+                <div className="qr-loading-spinner">
+                  <p>Carregando QR Code...</p>
+                </div>
+              ) : (
+                qrCodeUrl && (
+                  <>
+                    <img src={qrCodeUrl} alt={qrCodeTitle} />
+                    <p>Aponte a câmera para o código ou faça o download.</p>
+                    <a href={qrCodeUrl} download={`${qrCodeTitle.replace(/ /g, '_')}.png`} className="btn-download-qr">
+                      Fazer Download
+                    </a>
+                  </>
+                )
+              )}
             </div>
           </div>
         </div>
