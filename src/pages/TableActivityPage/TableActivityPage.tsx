@@ -4,6 +4,7 @@ import api from '../../config/api';
 import './TableActivityPage.css';
 import { FaEdit, FaTrash, FaTimes } from 'react-icons/fa';
 import { IoQrCodeSharp } from 'react-icons/io5';
+import { MdOutlineDisabledByDefault } from 'react-icons/md';
 
 interface Activity {
   id: number;
@@ -25,6 +26,10 @@ const TableActivityPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
   const [updateLoading, setUpdateLoading] = useState(false);
+
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
+  const [activityToDeactivate, setActivityToDeactivate] = useState<Activity | null>(null);
+  const [deactivateLoading, setDeactivateLoading] = useState(false);
 
   useEffect(() => {
     fetchActivities();
@@ -98,25 +103,37 @@ const TableActivityPage = () => {
     }
   };
 
-  const handleDelete = async (activityId: number, activityName: string) => {
-    const confirmed = window.confirm(`Tem certeza que deseja excluir a atividade "${activityName}"?`);
+  const handleOpenDeactivateModal = (activity: Activity) => {
+    setActivityToDeactivate(activity);
+    setIsDeactivateModalOpen(true);
+  };
 
-    if (!confirmed) return;
+  const handleCloseDeactivateModal = () => {
+    setIsDeactivateModalOpen(false);
+    setActivityToDeactivate(null);
+  };
 
-    setDeleteLoading(activityId);
+  const handleDeactivateConfirm = async () => {
+    if (!activityToDeactivate) return;
+
+    setDeactivateLoading(true);
     try {
-      await api.delete(`/activity/${activityId}`, {
+      const payload = { ...activityToDeactivate, isActive: false };
+
+      const response = await api.put(`/activity/${activityToDeactivate.id}`, payload, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
 
-      setActivities(prev => prev.filter(activity => activity.id !== activityId));
-      alert('Atividade excluída com sucesso!');
+      setActivities(prev => prev.map(act => act.id === activityToDeactivate.id ? response.data.data : act));
+      alert('Atividade desativada com sucesso!');
+      handleCloseDeactivateModal();
+
     } catch (err) {
-      alert('Erro ao excluir atividade.');
+      alert('Erro ao desativar atividade.');
     } finally {
-      setDeleteLoading(null);
+      setDeactivateLoading(false);
     }
   };
 
@@ -223,14 +240,24 @@ const TableActivityPage = () => {
                           <FaEdit />
                         </button>
 
-                        <button
-                          onClick={() => handleDelete(activity.id, activity.activityName)}
-                          className="action-btn delete-btn"
-                          title="Excluir atividade"
-                          disabled={deleteLoading === activity.id}
-                        >
-                          {deleteLoading === activity.id ? '...' : <FaTrash />}
-                        </button>
+                        {activity.isActive ?
+                          <button
+                            onClick={() => handleOpenDeactivateModal(activity)}
+                            className="action-btn delete-btn"
+                            title="Desativar atividade"
+                          >
+                            <MdOutlineDisabledByDefault />
+                          </button>
+                          :
+                          <button
+                            onClick={() => handleOpenDeactivateModal(activity)}
+                            className="action-btn delete-btn"
+                            title="Desativar atividade"
+                            disabled
+                          >
+                            <MdOutlineDisabledByDefault />
+                          </button>
+                        }
 
                         <button
                           onClick={() => handleDownloadPDF(activity.id)}
@@ -261,6 +288,7 @@ const TableActivityPage = () => {
         <p>Total de atividades: <strong>{activities.length}</strong></p>
       </div>
 
+      {/* --- Modal de Edição (já existente) --- */}
       {isModalOpen && selectedActivity && (
         <div className="modal-backdrop" onClick={handleModalClose}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -344,6 +372,41 @@ const TableActivityPage = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* --- NOVO MODAL: Desativação de Atividade --- */}
+      {isDeactivateModalOpen && activityToDeactivate && (
+        <div className="modal-backdrop" onClick={handleCloseDeactivateModal}>
+          <div className="modal-content confirmation-modal" onClick={e => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Desativar Atividade</h2>
+              <button onClick={handleCloseDeactivateModal} className="modal-close-btn">
+                <FaTimes />
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>
+                Tem certeza que deseja marcar a atividade
+                <strong> "{activityToDeactivate.activityName}" </strong>
+                como "Inativa"?
+              </p>
+              <span>Esta ação não removerá a atividade permanentemente.</span>
+            </div>
+            <div className="modal-footer">
+              <button type="button" onClick={handleCloseDeactivateModal} className="btn-cancel">
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleDeactivateConfirm}
+                className="btn-confirm-delete"
+                disabled={deactivateLoading}
+              >
+                {deactivateLoading ? 'Desativando...' : 'Sim, Desativar'}
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -423,6 +423,50 @@
   cursor: not-allowed;
 }
 
+/* --- Estilos para o Modal de Confirmação --- */
+.confirmation-modal {
+  max-width: 450px; /* Um pouco menor que o modal de edição */
+}
+
+.modal-body {
+  padding: 1rem 0;
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.modal-body p {
+  margin: 0 0 0.5rem 0;
+}
+
+.modal-body strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+.modal-body span {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.btn-confirm-delete {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: #fff;
+}
+
+.btn-confirm-delete:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.btn-confirm-delete:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* --- Início do Bloco de Responsividade --- */
+
+/* Telas de Tablet e Celulares Maiores (até 992px) */
 @media (max-width: 992px) {
   .table-container {
     padding: 0 0.5rem;
@@ -436,37 +480,42 @@
     font-size: 1rem;
   }
 
+  /* Adiciona scroll horizontal à tabela */
   .table-wrapper {
     overflow-x: auto;
   }
 
+  /* Garante que a tabela não quebre o layout */
   .activities-table {
     min-width: 900px;
   }
 }
 
+/* Telas de Celular (até 768px) */
 @media (max-width: 768px) {
+  /* Remove o efeito de vidro que causa o blur no mobile */
   .table-wrapper {
-    background: rgba(30, 41, 59, 0.8);
-    backdrop-filter: none;
+    background: rgba(30, 41, 59, 0.8); /* Fundo mais sólido */
+    backdrop-filter: none; /* Remove o blur */
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .activities-table {
-    min-width: 800px;
+    min-width: 800px; /* Ajusta a largura mínima */
   }
 
   .action-buttons {
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; /* Evita que os botões quebrem linha */
   }
 
+  /* Ajustes no Modal para Mobile */
   .modal-backdrop {
-    backdrop-filter: none;
+    backdrop-filter: none; /* Remove o blur do fundo do modal */
     background: rgba(0, 0, 0, 0.8);
   }
 
   .modal-content {
-    background: #1e293b;
+    background: #1e293b; /* Fundo sólido para o modal */
     padding: 1.5rem;
     max-height: 95vh;
   }
@@ -476,6 +525,7 @@
   }
 }
 
+/* Telas de Celular Pequenas (até 480px) */
 @media (max-width: 480px) {
   .page-header {
     padding: 1.5rem 1rem;
@@ -500,6 +550,14 @@
     width: 95%;
   }
 
+  .confirmation-modal {
+    width: 95%;
+  }
+
+  .modal-body {
+    font-size: 1rem;
+  }
+
   .modal-footer {
     flex-direction: column-reverse;
     gap: 0.5rem;
@@ -509,3 +567,4 @@
     width: 100%;
   }
 }
+/* --- Fim do Bloco de Responsividade --- */
