@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import api from '../../config/api';
 import './TableActivityPage.css';
-import { FaEdit, FaTimes, FaFilePdf, FaFileExcel } from 'react-icons/fa';
+import { FaEdit, FaTimes } from 'react-icons/fa';
 import { IoQrCodeSharp } from 'react-icons/io5';
 import { MdOutlineDisabledByDefault } from 'react-icons/md';
 
@@ -21,7 +21,6 @@ const TableActivityPage = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [deleteLoading, setDeleteLoading] = useState<number | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState<Activity | null>(null);
@@ -31,12 +30,10 @@ const TableActivityPage = () => {
   const [activityToDeactivate, setActivityToDeactivate] = useState<Activity | null>(null);
   const [deactivateLoading, setDeactivateLoading] = useState(false);
 
-  // --- ESTADOS DO MODAL QR Code ---
   const [isQrModalOpen, setIsQrModalOpen] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [qrCodeTitle, setQrCodeTitle] = useState('');
-  const [qrCodeLoading, setQrCodeLoading] = useState(false); // Novo estado de loading
-  // ---
+  const [qrCodeLoading, setQrCodeLoading] = useState(false);
 
   useEffect(() => {
     fetchActivities();
@@ -144,7 +141,6 @@ const TableActivityPage = () => {
     }
   };
 
-  // --- FUNÇÃO ATUALIZADA: Exibir Modal do QR Code ---
   const handleShowQrCode = async (activityId: number, type: 'entry' | 'exit') => {
     const endpoint = type === 'entry' ? 'qrEntryImage' : 'qrExitImage';
     const title = type === 'entry' ? 'QR Code de Entrada' : 'QR Code de Saída';
@@ -158,24 +154,22 @@ const TableActivityPage = () => {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
-        responseType: 'blob' // MUITO IMPORTANTE: informa ao axios para tratar a resposta como dados binários
+        responseType: 'blob'
       });
 
-      // Cria uma URL local para o blob da imagem recebida
       const imageUrl = URL.createObjectURL(response.data);
       setQrCodeUrl(imageUrl);
 
     } catch (err) {
       console.error("Erro ao buscar QR Code:", err);
       alert("Não foi possível carregar o QR Code. Verifique se a atividade possui as palavras-chave definidas.");
-      setIsQrModalOpen(false); // Fecha o modal se der erro
+      setIsQrModalOpen(false);
     } finally {
       setQrCodeLoading(false);
     }
   };
 
   const handleCloseQrModal = () => {
-    // IMPORTANTE: Revoga a URL do objeto para liberar memória
     if (qrCodeUrl) {
       URL.revokeObjectURL(qrCodeUrl);
     }
@@ -183,7 +177,6 @@ const TableActivityPage = () => {
     setQrCodeUrl('');
     setQrCodeTitle('');
   };
-  // ---
 
   const formatDate = (dateString: string | null) => {
     if (!dateString) return 'Não informado';
@@ -299,7 +292,6 @@ const TableActivityPage = () => {
                           </button>
                         }
 
-                        {/* Botão para QR Code de ENTRADA */}
                         <button
                           onClick={() => handleShowQrCode(activity.id, 'entry')}
                           className="action-btn qr-btn-entry"
@@ -308,7 +300,6 @@ const TableActivityPage = () => {
                           <IoQrCodeSharp />
                         </button>
 
-                        {/* Botão para QR Code de SAÍDA */}
                         <button
                           onClick={() => handleShowQrCode(activity.id, 'exit')}
                           className="action-btn qr-btn-exit"
@@ -330,7 +321,6 @@ const TableActivityPage = () => {
         <p>Total de atividades: <strong>{activities.length}</strong></p>
       </div>
 
-      {/* --- Modal de Edição (já existente) --- */}
       {isModalOpen && selectedActivity && (
         <div className="modal-backdrop" onClick={handleModalClose}>
           <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -418,7 +408,6 @@ const TableActivityPage = () => {
         </div>
       )}
 
-      {/* --- NOVO MODAL: Desativação de Atividade --- */}
       {isDeactivateModalOpen && activityToDeactivate && (
         <div className="modal-backdrop" onClick={handleCloseDeactivateModal}>
           <div className="modal-content confirmation-modal" onClick={e => e.stopPropagation()}>
@@ -453,7 +442,6 @@ const TableActivityPage = () => {
         </div>
       )}
 
-      {/* --- MODAL ATUALIZADO: Exibição do QR Code --- */}
       {isQrModalOpen && (
         <div className="modal-backdrop" onClick={handleCloseQrModal}>
           <div className="modal-content qr-modal" onClick={e => e.stopPropagation()}>

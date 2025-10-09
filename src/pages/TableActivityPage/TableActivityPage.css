@@ -423,9 +423,8 @@
   cursor: not-allowed;
 }
 
-/* --- Estilos para o Modal de Confirmação --- */
 .confirmation-modal {
-  max-width: 450px; /* Um pouco menor que o modal de edição */
+  max-width: 450px;
 }
 
 .modal-body {
@@ -464,9 +463,6 @@
   cursor: not-allowed;
 }
 
-/* --- Início do Bloco de Responsividade --- */
-
-/* Telas de Tablet e Celulares Maiores (até 992px) */
 @media (max-width: 992px) {
   .table-container {
     padding: 0 0.5rem;
@@ -480,42 +476,37 @@
     font-size: 1rem;
   }
 
-  /* Adiciona scroll horizontal à tabela */
   .table-wrapper {
     overflow-x: auto;
   }
 
-  /* Garante que a tabela não quebre o layout */
   .activities-table {
     min-width: 900px;
   }
 }
 
-/* Telas de Celular (até 768px) */
 @media (max-width: 768px) {
-  /* Remove o efeito de vidro que causa o blur no mobile */
   .table-wrapper {
-    background: rgba(30, 41, 59, 0.8); /* Fundo mais sólido */
-    backdrop-filter: none; /* Remove o blur */
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: none;
     border: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .activities-table {
-    min-width: 800px; /* Ajusta a largura mínima */
+    min-width: 800px;
   }
 
   .action-buttons {
-    flex-wrap: nowrap; /* Evita que os botões quebrem linha */
+    flex-wrap: nowrap;
   }
 
-  /* Ajustes no Modal para Mobile */
   .modal-backdrop {
-    backdrop-filter: none; /* Remove o blur do fundo do modal */
+    backdrop-filter: none;
     background: rgba(0, 0, 0, 0.8);
   }
 
   .modal-content {
-    background: #1e293b; /* Fundo sólido para o modal */
+    background: #1e293b;
     padding: 1.5rem;
     max-height: 95vh;
   }
@@ -525,7 +516,6 @@
   }
 }
 
-/* Telas de Celular Pequenas (até 480px) */
 @media (max-width: 480px) {
   .page-header {
     padding: 1.5rem 1rem;
@@ -568,7 +558,6 @@
   }
 }
 
-/* Botões de QR Code */
 .qr-btn-entry {
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
@@ -586,7 +575,6 @@
 }
 
 
-/* --- Estilos para o Modal do QR Code --- */
 .qr-modal {
   max-width: 400px;
   text-align: center;
@@ -604,8 +592,8 @@
   max-width: 100%;
   height: auto;
   border-radius: 8px;
-  background: white; /* Garante fundo branco caso a imagem tenha transparência */
-  padding: 10px; /* Espaçamento interno */
+  background: white;
+  padding: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -632,4 +620,3 @@
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
 }
 
-/* --- Fim do Bloco de Responsividade --- */
