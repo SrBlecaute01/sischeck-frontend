@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.0.1...v1.0.2) (2025-10-11)
+
+
+### Bug Fixes
+
+* sisweek backend service enviroment ([352d39e](https://github.com/SrBlecaute01/sischeck-frontend/commit/352d39ef98ee0db7b90b357f4ab6fcd61c467b47))
+
 ## [1.0.1](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.0.0...v1.0.1) (2025-10-11)
 
 
