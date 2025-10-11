@@ -2,7 +2,7 @@ import { useState } from 'react';
 import api from '../../config/api';
 import './RegisterUserPage.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { AddCPFmask, maskCPF } from '../../utils/format-cpf';
+import { maskCPF } from '../../utils/format-cpf';
 import logoImage from '../../assets/sisweek-newlogo.svg';
 
 const RegisterUserPage = () => {
@@ -38,13 +38,11 @@ const RegisterUserPage = () => {
         ...formData,
         name: `${formData.name} ${formData.sobrenome}`,
       }
-
-      const response = await api.post('/auth/register', bodyRequest, {
+      await api.post('/auth/register', bodyRequest, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
       alert('Usuário cadastrado com sucesso! Faça o login para continuar.');
       navigate('/login');
     } catch (err: any) {

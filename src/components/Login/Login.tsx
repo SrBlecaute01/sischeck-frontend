@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import api from '../../config/api';
 import { jwtDecode } from 'jwt-decode';
 import { maskCPF, removeCPFMask } from '../../utils/format-cpf';
@@ -13,11 +13,11 @@ interface LoginPageProps {
 }
 
 const Login = ({ onLoginSuccess }: LoginPageProps) => {
-  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     cpf: '',
     password: ''
   });
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -62,6 +62,7 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
 
         const userRole = decoded.role;
         localStorage.setItem('role', userRole)
+        onLoginSuccess(token, userRole);
       }
 
       window.location.reload();

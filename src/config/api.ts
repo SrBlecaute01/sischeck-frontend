@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const local = 'http://localhost:3056'
+const baseUrl = import.meta.env.SISCHECK_SERVICE_URL
 
 const api = axios.create({
-  baseURL: local
+  baseURL: baseUrl
 });
 
 export default api;
