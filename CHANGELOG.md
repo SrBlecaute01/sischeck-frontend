@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.0.0...v1.0.1) (2025-10-11)
+
+
+### Bug Fixes
+
+* enviroment variables ([4af69a3](https://github.com/SrBlecaute01/sischeck-frontend/commit/4af69a392ba296161bba7efa315f21b784d9afa8))
+
 ## 1.0.0 (2025-10-11)
 
 
