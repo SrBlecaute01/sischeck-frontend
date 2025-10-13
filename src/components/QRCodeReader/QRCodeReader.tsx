@@ -204,33 +204,45 @@ const QRCodeReader = () => {
               autoPlay
             />
 
-            {!isScanning && (
-              <div className="start-scanning">
-                <button onClick={startScanning} className="scan-button">
-                  Iniciar Escaneamento
-                </button>
-                {devices.length > 0 && (
-                  <p className="device-info">
-                    {devices.length} câmera(s) encontrada(s)
-                  </p>
-                )}
-              </div>
+            {isScanning && (
+              <>
+                <div className="scan-frame"></div>
+                <div className="scan-corners"><span></span></div>
+                <div className="scan-line"></div>
+              </>
             )}
 
-            {isScanning && (
-              <div className="scanning-controls">
-                <p>Escaneando... Aponte para o QR Code</p>
-                <button onClick={stopScanning} className="stop-button">
-                  Parar Escaneamento
-                </button>
-              </div>
+
+
+
+          </div>
+        )}
+
+        {!isScanning && (
+          <div className="start-scanning">
+            <button onClick={startScanning} className="scan-button">
+              Iniciar Escaneamento
+            </button>
+            {devices.length > 0 && (
+              <p className="device-info">
+                {devices.length} câmera(s) encontrada(s)
+              </p>
             )}
+          </div>
+        )}
+
+        {isScanning && (
+          <div className="scanning-controls">
+            <p>Escaneando... Aponte para o QR Code</p>
+            <button onClick={stopScanning} className="stop-button">
+              Parar Escaneamento
+            </button>
           </div>
         )}
 
         {scanResult && (
           <div className="scan-result">
-            <strong>QR Code lido:</strong> {scanResult}
+            <strong>QR Code lido</strong>
           </div>
         )}
 
