@@ -31,9 +31,17 @@ const RegisterActivityPage = () => {
     setSuccess('');
     setError('');
 
+    if (form.startDate && form.endDate && new Date(form.endDate) < new Date(form.startDate)) {
+      setError('A data de término não pode ser anterior à data de início.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const bodyRequest = {
-        ...form
+        ...form,
+        startDate: form.startDate ? new Date(form.startDate).toISOString() : null,
+        endDate: form.endDate ? new Date(form.endDate).toISOString() : null,
       }
       await api.post('/activity', bodyRequest, {
         headers: {
