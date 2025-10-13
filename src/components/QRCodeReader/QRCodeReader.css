@@ -150,7 +150,7 @@
   max-width: 360px;
   border-radius: 10px;
   padding: 10px 12px;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   box-sizing: border-box;
   word-break: break-all;
 }
@@ -171,6 +171,10 @@
   background: rgba(248,113,113,0.08);
   border: 1px solid rgba(248,113,113,0.12);
   color: #ffd7d7;
+}
+
+.error-message p {
+  font-size: 0.80rem;
 }
 
 .success-message {

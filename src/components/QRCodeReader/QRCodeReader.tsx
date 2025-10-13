@@ -18,6 +18,7 @@ const QRCodeReader = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([]);
+  const [showReadConfirmation, setShowReadConfirmation] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const codeReader = useRef<BrowserMultiFormatReader | null>(null);
 
@@ -63,6 +64,16 @@ const QRCodeReader = () => {
     }
   };
 
+  useEffect(() => {
+    if (showReadConfirmation) {
+      const timer = setTimeout(() => {
+        setShowReadConfirmation(false);
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showReadConfirmation]);
+
   const startScanning = async () => {
     try {
       setIsScanning(true);
@@ -100,6 +111,7 @@ const QRCodeReader = () => {
           }
 
           setScanResult(result.getText());
+          setShowReadConfirmation(true)
 
           const parts = qrCodeContent.split(';')
           const firstContentQrCode = parts[0] ? parts[0].trim() : '';
@@ -110,8 +122,12 @@ const QRCodeReader = () => {
         }
       }
     } catch (err: any) {
-      console.error('Erro ao iniciar scan:', err);
-      setError(`Erro ao iniciar escaneamento: ${err.message}`);
+      if (err && err.message && !err.message.includes('Video stream has ended')) {
+        console.error('Erro ao iniciar scan:', err);
+        setError(`Erro ao iniciar escaneamento: ${err.message}`);
+      } else {
+        console.log('Scan interrompido pelo usuário.');
+      }
       setIsScanning(false);
     }
   };
@@ -151,14 +167,17 @@ const QRCodeReader = () => {
         }
       });
 
-      if (response.status === 200) {
+      if (response.data.success) {
         setSuccess('QR Code processado com sucesso!');
-        console.log('Resposta:', response.data);
       } else {
-        setError('Erro ao processar QR Code');
+        setError(response.data.error || 'Ocorreu um erro desconhecido.');
       }
-    } catch (err) {
-      setError('Erro ao conectar com o servidor');
+    } catch (err: any) {
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else {
+        setError('Erro de conexão com o servidor.');
+      }
     } finally {
       setLoading(false);
     }
@@ -240,27 +259,27 @@ const QRCodeReader = () => {
           </div>
         )}
 
-        {scanResult && (
-          <div className="scan-result">
-            <strong>QR Code lido</strong>
-          </div>
-        )}
-
         {loading && (
           <div className="loading-message">
             Processando QR Code...
           </div>
         )}
 
-        {error && !hasPermission && (
+        {error && (
           <div className="error-message">
-            {error}
+            <p>{error}</p>
+            <button onClick={startScanning} className="retry-button">
+              Tentar Novamente
+            </button>
           </div>
         )}
 
         {success && (
           <div className="success-message">
-            {success}
+            <p>{success}</p>
+            <button onClick={startScanning} className="scan-button">
+              Escanear Outro
+            </button>
           </div>
         )}
       </div>
