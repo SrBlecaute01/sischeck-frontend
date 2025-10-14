@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.0.2...v1.1.0) (2025-10-13)
+
+
+### Features
+
+* adiciona animação para o leitor de QRCode ([5379c36](https://github.com/SrBlecaute01/sischeck-frontend/commit/5379c36729e7065c2dc04ba1977c0cc17632dbdc))
+* ajusta a exibição do horário no frontend salvando no banco dem UTC e exibindo de acordo com o local atual que se encontra ([fedf01b](https://github.com/SrBlecaute01/sischeck-frontend/commit/fedf01b711eb5855e467389bd8bef2bfde38e249))
+* atualiza o favicon para o novo logo do sisweek ([59185c6](https://github.com/SrBlecaute01/sischeck-frontend/commit/59185c6d736bf4ff740e74e940735b5cac20157c))
+
 ## [1.0.2](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.0.1...v1.0.2) (2025-10-11)
 
 
