@@ -11,7 +11,7 @@ interface MyJwtPayload {
 }
 
 const QRCodeReader = () => {
-  const [scanResult, setScanResult] = useState<string>('');
+  const [, setScanResult] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
