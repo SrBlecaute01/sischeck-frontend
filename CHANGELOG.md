@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.0...v1.1.1) (2025-10-14)
+
+
+### Bug Fixes
+
+* remove unused method ([7a0808d](https://github.com/SrBlecaute01/sischeck-frontend/commit/7a0808dcac8d6c025cad7c75ad516523251cbc2b))
+
 ## [1.1.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.0.2...v1.1.0) (2025-10-13)
 
 
