@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.2...v1.1.3) (2025-10-14)
+
+
+### Bug Fixes
+
+* dockerignore file name ([06972bb](https://github.com/SrBlecaute01/sischeck-frontend/commit/06972bbbec46bdcfed2872d78a95c3914428e9cc))
+
 ## [1.1.2](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.1...v1.1.2) (2025-10-14)
 
 
