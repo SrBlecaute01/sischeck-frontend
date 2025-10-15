@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.3...v1.1.4) (2025-10-15)
+
+
+### Bug Fixes
+
+* ensures SPA fallback in nginx container ([7fb4cce](https://github.com/SrBlecaute01/sischeck-frontend/commit/7fb4cce78b0a36dd63e0f8ea3228215d1f9cafd1))
+
 ## [1.1.3](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.2...v1.1.3) (2025-10-14)
 
 
