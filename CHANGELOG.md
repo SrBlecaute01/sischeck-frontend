@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.5](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.4...v1.1.5) (2025-10-16)
+
+
+### Bug Fixes
+
+* correção visibilidade login ([d6efa47](https://github.com/SrBlecaute01/sischeck-frontend/commit/d6efa47f216f7fb73ffcc1061bff0b171e7ae2a3))
+
 ## [1.1.4](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.3...v1.1.4) (2025-10-15)
 
 
