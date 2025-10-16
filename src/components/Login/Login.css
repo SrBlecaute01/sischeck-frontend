@@ -70,9 +70,9 @@
   border-color: #667eea;
 }
 
-.error-message {
-  background: #fee;
-  color: #c33;
+.error-container {
+  background: rgb(248, 203, 203);
+  color: rgba(153, 0, 0, 0.795);
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 1rem;

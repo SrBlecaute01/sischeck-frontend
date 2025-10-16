@@ -122,7 +122,7 @@ const Login = ({ onLoginSuccess }: LoginPageProps) => {
               </div>
             </div>
 
-            {error && <div className="error-message">{error}</div>}
+            {error && <div className="error-container">{error}</div>}
 
             <button type="submit" disabled={loading} className='btn-login'>
               {loading ? 'Entrando...' : 'Entrar'}
