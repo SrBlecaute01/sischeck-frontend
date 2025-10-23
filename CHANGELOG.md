@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.2.0...v1.3.0) (2025-10-23)
+
+
+### Features
+
+* add build workflow ([79a1b50](https://github.com/SrBlecaute01/sischeck-frontend/commit/79a1b500a833020df15e80750e49102f79fb1e61))
+
 ## [1.2.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.4...v1.2.0) (2025-10-23)
 
 
