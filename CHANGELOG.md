@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.4...v1.2.0) (2025-10-23)
+
+
+### Features
+
+* implementa nova tela para listar as atividades que o user está participando e o status da sua presença na mesma ([e7b8f40](https://github.com/SrBlecaute01/sischeck-frontend/commit/e7b8f4092c718c6f31582754ceeda2bf7afe54e5))
+
+
+### Bug Fixes
+
+* correção visibilidade login ([d6efa47](https://github.com/SrBlecaute01/sischeck-frontend/commit/d6efa47f216f7fb73ffcc1061bff0b171e7ae2a3))
+
 ## [1.1.4](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.1.3...v1.1.4) (2025-10-15)
 
 
