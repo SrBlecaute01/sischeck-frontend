@@ -46,7 +46,7 @@ const MyActivityPage = () => {
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [userName, setUserName] = useState('');
+  const [, setUserName] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
