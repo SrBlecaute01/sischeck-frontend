@@ -10,6 +10,7 @@ import ActivityPage from './pages/ActivityPage/ActivityPage'
 import { useEffect, useState } from 'react';
 import RegisterUserPage from './pages/RegisterUserPage/RegisterUserPage'
 import TableActivityPage from './pages/TableActivityPage/TableActivityPage'
+import MyActivityPage from './pages/MyActivityPage/MyActivityPage'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +62,7 @@ function App() {
               )
             }
             <Route path='/participante' element={<ParticipantPage />} />
+            <Route path='/minhas-atividades' element={<MyActivityPage />} />
             <Route path='/atividades' element={<ActivityPage />} />
             <Route path='/lista-atividades' element={<ListActivityPage />} />
             <Route path='/qr-reader' element={<QRCodeReader />} />

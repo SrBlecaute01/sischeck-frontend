@@ -11,6 +11,7 @@ const Header = () => {
    const navigateToAdminPage = () => navigate('/admin');
    const navigateToParticipantPage = () => navigate('/participante');
    const navigateToActivityPage = () => navigate('/atividades');
+   const navigateToMyActivityPage = () => navigate('/minhas-atividades');
 
    const handleLogout = () => {
       localStorage.removeItem('token')
@@ -40,6 +41,7 @@ const Header = () => {
             <ul>
                <li onClick={navigateToParticipantPage}>Área do Participante</li>
                <li onClick={navigateToActivityPage}>Atividades</li>
+               <li onClick={navigateToMyActivityPage}>Minhas Atividades</li>
                {roleUser === 'ADMIN' && (
                   <li onClick={navigateToAdminPage}>Área do Administrador</li>
                )}
