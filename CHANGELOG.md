@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.3.0...v1.4.0) (2025-10-29)
+
+
+### Features
+
+* adiciona modal de instruções para registro de presença ([69af012](https://github.com/SrBlecaute01/sischeck-frontend/commit/69af01299c2ae98d124c6563911e4935c2d2d7a8))
+
 ## [1.3.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.2.0...v1.3.0) (2025-10-23)
 
 
