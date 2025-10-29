@@ -217,7 +217,10 @@ const QRCodeReader = () => {
             <video
               ref={videoRef}
               className="qr-video"
-              style={{ display: isScanning ? 'block' : 'none' }}
+              style={{
+                display: isScanning ? 'block' : 'none',
+                transform: 'scaleX(-1)'
+              }}
               playsInline
               muted
               autoPlay
