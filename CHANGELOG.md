@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.4.0...v1.4.1) (2025-10-30)
+
+
+### Bug Fixes
+
+* camera inversion and improved error messages ([527e3ce](https://github.com/SrBlecaute01/sischeck-frontend/commit/527e3ce37301a68939dd11820cbd0c72b94dd5a0))
+
 ## [1.4.0](https://github.com/SrBlecaute01/sischeck-frontend/compare/v1.3.0...v1.4.0) (2025-10-29)
 
 
