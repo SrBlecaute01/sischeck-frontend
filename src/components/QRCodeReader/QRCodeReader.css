@@ -267,3 +267,109 @@
 }
 
 .hidden { display: none !important; }
+
+.success-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2,6,23,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 16px;
+}
+
+.success-modal {
+    background: linear-gradient(180deg,#0f1724,#0b1220);
+    color: #eef2ff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.7);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.success-modal h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.success-modal-text {
+    margin: 8px 0 16px 0;
+    color: #dff6e8;
+    font-weight: 600;
+}
+
+.success-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.success-modal .scan-button {
+    flex: 1 1 140px;
+}
+
+.success-modal .stop-button {
+    flex: 1 1 120px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #ffdede;
+}
+
+.error-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2,6,23,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 16px;
+}
+
+.error-modal {
+    background: linear-gradient(180deg,#2b0b0b,#1a0707);
+    color: #fff5f5;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(10,6,6,0.7);
+    border: 1px solid rgba(255,100,100,0.08);
+}
+
+.error-modal h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.error-modal-text {
+    margin: 8px 0 16px 0;
+    color: #ffd6d6;
+    font-weight: 600;
+}
+
+.error-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-modal .retry-button {
+    flex: 1 1 140px;
+    background: linear-gradient(90deg,#ffb86b,#ff7ab6);
+    color: #081028;
+}
+
+.error-modal .stop-button {
+    flex: 1 1 120px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #ffdede;
+}

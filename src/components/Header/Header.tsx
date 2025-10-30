@@ -1,61 +1,60 @@
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './Header.css';
 import sisweeklogo from '../../assets/sisweek-newlogo.svg'
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 const Header = () => {
-   const navigate = useNavigate()
-   const [roleUser, setRoleUser] = useState('')
-   const [menuOpen, setMenuOpen] = useState(false)
+  const navigate = useNavigate()
+  const [roleUser, setRoleUser] = useState('')
+  const [menuOpen, setMenuOpen] = useState(false)
 
-   const navigateToAdminPage = () => navigate('/admin');
-   const navigateToParticipantPage = () => navigate('/participante');
-   const navigateToActivityPage = () => navigate('/atividades');
-   const navigateToMyActivityPage = () => navigate('/minhas-atividades');
+  const navigateToAdminPage = () => navigate('/admin');
+  const navigateToParticipantPage = () => navigate('/participante');
+  const navigateToActivityPage = () => navigate('/atividades');
+  const navigateToMyActivityPage = () => navigate('/minhas-atividades');
 
-   const handleLogout = () => {
-      localStorage.removeItem('token')
-      localStorage.removeItem('role')
-      window.location.reload()
-   }
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('role')
+    window.location.reload()
+  }
 
-   useEffect(() => {
-      setRoleUser(localStorage.getItem('role') || '')
-   }, []);
+  useEffect(() => {
+    setRoleUser(localStorage.getItem('role') || '')
+  }, []);
 
-   return (
+  return (
       <header className="header-container">
-         <div className='img-content'>
-            <img src={sisweeklogo} alt="SisWeek Logo" />
-         </div>
+        <div className='img-content'>
+          <img src={sisweeklogo} alt="SisWeek Logo"/>
+        </div>
 
-         <button
+        <button
             className="menu-toggle"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Abrir menu"
-         >
-            <span className="hamburger"></span>
-         </button>
+            aria-label="Abrir menu">
+          <span className="hamburger"></span>
+        </button>
 
-         <nav className={menuOpen ? "nav-menu open" : "nav-menu"}>
-            <ul>
-               <li onClick={navigateToParticipantPage}>Área do Participante</li>
-               <li onClick={navigateToActivityPage}>Atividades</li>
-               <li onClick={navigateToMyActivityPage}>Minhas Atividades</li>
-               {roleUser === 'ADMIN' && (
-                  <li onClick={navigateToAdminPage}>Área do Administrador</li>
-               )}
-               <li className="mobile-logout">
-                  <button onClick={handleLogout}>Sair</button>
-               </li>
-            </ul>
-         </nav>
+        <nav className={menuOpen ? "nav-menu open" : "nav-menu"}>
+          <ul>
+            <li onClick={navigateToMyActivityPage}>Minhas Atividades</li>
+            <li onClick={navigateToParticipantPage}>Registrar Presença</li>
+            <li onClick={navigateToActivityPage}>Programação</li>
+            {roleUser === 'ADMIN' && (
+                <li onClick={navigateToAdminPage}>Área do Administrador</li>
+            )}
+            <li className="mobile-logout">
+              <button onClick={handleLogout}>Sair</button>
+            </li>
+          </ul>
+        </nav>
 
-         <div className='right-content'>
-            <button onClick={handleLogout}>Sair</button>
-         </div>
+        <div className='right-content'>
+          <button onClick={handleLogout}>Sair</button>
+        </div>
       </header>
-   );
+  );
 };
 
 export default Header;
